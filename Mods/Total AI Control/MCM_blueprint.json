@@ -1,0 +1,99 @@
+{
+    "ModName": "Total AI Control",
+    "SchemaVersion": 1,
+    "Tabs": [
+        {
+            "TabId": "general",
+            "TabName": "General",
+            "Sections": [
+                {
+                    "SectionId": "general_settings",
+                    "SectionName": "General Settings",
+                    "Settings": [
+                        {
+                            "Id": "mod_enabled",
+                            "Type": "checkbox",
+                            "Name": "Enabled",
+                            "Description": "Toggle the mod on/off.",
+                            "Default": true
+                        }
+                    ]
+                },
+                {
+                    "SectionId": "logger_settings",
+                    "SectionName": "Logger Settings",
+                    "Settings": [
+                        {
+                            "Id": "logger_level",
+                            "Type": "slider_int",
+                            "Name": "Logger level",
+                            "Description": "0 = DEBUG, 1 = INFO, 2 = WARN, 3 = ERROR",
+                            "Default": 1,
+                            "Options": {
+                                "Min": 0,
+                                "Max": 3
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "TabId": "ai_config",
+            "TabName": "AI Config",
+            "Sections": [
+                {
+                    "SectionId": "spells_settings",
+                    "SectionName": "Spell Settings",
+                    "Settings": [
+                        {
+                            "Id": "ignored_spells",
+                            "Type": "list_v2",
+                            "Name": "Ignored spells",
+                            "Description": " ",
+                            "Default": {
+                                "enabled": true,
+                                "elements": [
+                                    {
+                                        "name": "Shout_DetectThoughts",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "name": "Shout_PassWithoutTrace",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "name": "Shout_Thaumaturgy",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "name": "Target_ArcaneLock",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "name": "Target_BlessingOfTheTrickster",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "name": "Target_Friends",
+                                        "enabled": true
+                                    },
+                                    {
+                                        "name": "Target_Seeming",
+                                        "enabled": true
+                                    }
+                                ]
+                            },
+                            "Options": {
+                                "AllowReordering": true,
+                                "PageSize": 8,
+                                "ReadOnly": false,
+                                "ShowSearchBar": true
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

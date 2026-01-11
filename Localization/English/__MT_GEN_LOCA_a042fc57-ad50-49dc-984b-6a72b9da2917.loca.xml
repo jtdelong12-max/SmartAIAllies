@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<contentList>
+	<content contentuid="BANISHED_AI_RETURN" version="1">Banished</content>
+	<content contentuid="BANISHED_AI_RETURN_Des" version="1">Banished from the party; returns after combat ends.</content>
+	<content contentuid="BLOCK_ATTACKS" version="1">Block Attacks</content>
+	<content contentuid="BLOCK_ATTACKS_Des" version="1">Negates next attacks damage.</content>
+	<content contentuid="AI_CONTROLLED_DEFAULT" version="1">AI-Controlled: Default</content>
+	<content contentuid="AI_CONTROLLED_MELEE" version="1">AI-Controlled: Melee</content>
+	<content contentuid="AI_CONTROLLED_RANGED" version="1">AI-Controlled: Ranged</content>
+	<content contentuid="AI_CONTROLLED_MAGE" version="1">AI-Controlled: Mage</content>
+	<content contentuid="AI_CONTROLLED_ROGUE" version="1">AI-Controlled: Rogue</content>
+	<content contentuid="AI_CONTROLLED_MELEE_MAGIC" version="1">AI-Controlled: Melee-Magic</content>
+	<content contentuid="AI_CONTROLLED_MONK_MELEE" version="1">AI-Controlled: Monk</content>
+	<content contentuid="AI_CONTROLLED_MONK_MAGE" version="1">AI-Controlled: Monk-Mage</content>
+	<content contentuid="AI_CONTROLLED_HEALER_MELEE" version="1">AI-Controlled: Healer (Melee)</content>
+	<content contentuid="AI_CONTROLLED_HEALER_RANGED" version="1">AI-Controlled: Healer (Ranged)</content>
+	<content contentuid="AI_CONTROLLED_NECROMANCER_MELEE" version="1">AI-Controlled: Necromancer (Melee)</content>
+	<content contentuid="AI_CONTROLLED_NECROMANCER_RANGED" version="1">AI-Controlled: Necromancer (Ranged)</content>
+	<content contentuid="AI_CONTROLLED_CUSTOM1" version="1">AI-Controlled: Custom 1</content>
+	<content contentuid="AI_CONTROLLED_CUSTOM2" version="1">AI-Controlled: Custom 2</content>
+	<content contentuid="AI_CONTROLLED_SUMMON" version="1">AI-Controlled: Summon</content>
+	<content contentuid="AI_CONTROLLED_Des" version="1">This character is controlled by AI during combat.</content>
+	<content contentuid="AI_CONTROLLED_Passive" version="1">AI-Controlled Buffs</content>
+	<content contentuid="AI_CONTROLLED_Passive_Des" version="1">This character is buffed with extra resources.</content>
+	<content contentuid="AI_SUMMONS" version="1">AI Summons</content>
+	<content contentuid="AI_SUMMONS_Des" version="1">Summons from this entity will be controlled by AI.</content>
+	<content contentuid="AI_SHADOWCURSE_Passive" version="1">Shadow Curse Immunity</content>
+	<content contentuid="AI_SHADOWCURSE_Passive_Des" version="1">This character will be immune to Shadow Curse.</content>
+	<content contentuid="Target_AI" version="1">AI-Enable Spell</content>
+	<content contentuid="Target_AI_Des" version="1">Enables AI control of your character.</content>
+	<content contentuid="Target_AI_DEFAULT" version="1">AI-Enable Spell: Default</content>
+	<content contentuid="Target_AI_MELEE" version="1">AI-Enable Spell: Melee</content>
+	<content contentuid="Target_AI_RANGED" version="1">AI-Enable Spell: Ranged</content>
+	<content contentuid="Target_AI_MAGE" version="1">AI-Enable Spell: Mage</content>
+	<content contentuid="Target_AI_ROGUE" version="1">AI-Enable Spell: Rogue</content>
+	<content contentuid="Target_AI_MELEE_MAGIC" version="1">AI-Enable Spell: Melee-Magic</content>
+	<content contentuid="Target_AI_MONK_MELEE" version="1">AI-Enable Spell: Monk</content>
+	<content contentuid="Target_AI_MONK_MAGE" version="1">AI-Enable Spell: Monk-Mage</content>
+	<content contentuid="Target_AI_HEALER_MELEE" version="1">AI-Enable Spell: Healer (Melee)</content>
+	<content contentuid="Target_AI_HEALER_RANGED" version="1">AI-Enable Spell: Healer (Ranged)</content>
+	<content contentuid="Target_AI_NECROMANCER_MELEE" version="1">AI-Enable Spell: Necromancer (Melee)</content>
+	<content contentuid="Target_AI_NECROMANCER_RANGED" version="1">AI-Enable Spell: Necromancer (Ranged)</content>
+	<content contentuid="Target_AI_CUSTOM1" version="1">AI-Enable Spell: Custom 1</content>
+	<content contentuid="Target_AI_CUSTOM2" version="1">AI-Enable Spell: Custom 2</content>
+	<content contentuid="Target_AI_PRESET_Des" version="1">Enables AI control of your character with the selected combat tactics.</content>
+	<content contentuid="Target_AI_Stop" version="1">AI-Disable</content>
+	<content contentuid="Target_AI_Stop_Des" version="1">Disables AI control of the character and clear related statuses.</content>
+	<content contentuid="Target_AI_FACTION_OVERRIDE" version="1">AI-Conversion Spell</content>
+	<content contentuid="Target_AI_FACTION_OVERRIDE_Des" version="1">Converts the targeted AI to the player faction; intended to circumvent a game bug.</content>
+</contentList>

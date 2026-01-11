@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="7" revision="1" build="3" lslib_meta="v1,bswap_guids,lsf_keys_adjacency" />
+	<region id="TextureBank">
+		<node id="TextureBank">
+			<children>
+				<node id="Resource">
+					<attribute id="ID" type="FixedString" value="dfd52e18-7712-2fd9-99b1-ec901c9eedbc" />
+					<attribute id="Name" type="LSString" value="TAC-Icons" />
+					<attribute id="SourceFile" type="LSString" value="Public/Total AI Control/Assets/Textures/Icons/TAC-Icons.dds" />
+					<attribute id="Template" type="FixedString" value="TAC-Icons" />
+					<attribute id="Streaming" type="bool" value="True" />
+					<attribute id="Type" type="int32" value="1" />
+					<attribute id="SRGB" type="bool" value="False" />
+					<attribute id="Width" type="int32" value="512" />
+					<attribute id="Height" type="int32" value="512" />
+					<attribute id="Depth" type="int32" value="1" />
+				</node>
+			</children>
+		</node>
+	</region>
+</save>
