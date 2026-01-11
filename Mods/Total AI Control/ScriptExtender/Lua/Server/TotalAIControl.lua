@@ -47,6 +47,10 @@ function Logger.debug(message) Logger.log(Logger.LEVELS.DEBUG, message) end
 --
 ------------------------------------------
 local ModEnabled = MCM.Get("mod_enabled")
+local AutoGrantContainer = MCM.Get("auto_grant_container") ~= false
+local RevivifyPrompt = MCM.Get("revivify_prompt") ~= false
+local AISummonsEnabled = MCM.Get("ai_summons_enabled") ~= false
+local NonLethalFollowControl = MCM.Get("nonlethal_follow_controlled") ~= false
 local EnsureContainerSpell
 local EnsurePartyHasContainerSpell
 
@@ -57,11 +61,20 @@ Ext.ModEvents.BG3MCM["MCM_Setting_Saved"]:Subscribe(function(payload)
 
     if payload.settingId == "mod_enabled" then
         ModEnabled = payload.value
-        if ModEnabled then EnsurePartyHasContainerSpell() end
+        if ModEnabled and AutoGrantContainer then EnsurePartyHasContainerSpell() end
     elseif payload.settingId == "logger_level" then
         Logger.currentLevel = payload.value
     elseif payload.settingId == "ignored_spells" then
         PatchUnwantedSpells(payload.value)
+    elseif payload.settingId == "auto_grant_container" then
+        AutoGrantContainer = payload.value
+        if ModEnabled and AutoGrantContainer then EnsurePartyHasContainerSpell() end
+    elseif payload.settingId == "revivify_prompt" then
+        RevivifyPrompt = payload.value
+    elseif payload.settingId == "ai_summons_enabled" then
+        AISummonsEnabled = payload.value
+    elseif payload.settingId == "nonlethal_follow_controlled" then
+        NonLethalFollowControl = payload.value
     end
 end)
 
@@ -91,6 +104,7 @@ local function EnsureContainerSpell(character)
 end
 
 local function EnsurePartyHasContainerSpell()
+    if not AutoGrantContainer then return end
     local party = Osi.DB_PartyMembers:Get(nil)
     for _, memberEntry in ipairs(party) do 
         EnsureContainerSpell(memberEntry[1])
@@ -115,6 +129,7 @@ Ext.Events.SessionLoaded:Subscribe(function()
     InitModVars()
     if not ModEnabled then return end
     PatchUnwantedSpells(MCM.Get("ignored_spells"))
+    if AutoGrantContainer then EnsurePartyHasContainerSpell() end
 end)
 
 ------------------------------------------
@@ -249,7 +264,7 @@ Ext.Osiris.RegisterListener("DownedChanged", 2, "before", function(character, is
 end)
 
 Ext.Osiris.RegisterListener("MessageBoxYesNoClosed", 3, "after", function (character, message, option)
-    if not ModEnabled then return end
+    if not ModEnabled or not RevivifyPrompt then return end
     if message:find("Scroll of Revivify", -20) and option == 1 then
         local scroll_of_revifify = "c1c3e4fb-d68c-4e10-afdc-d4550238d50e"
         local scrollAmount = Osi.TemplateIsInPartyInventory(scroll_of_revifify, character, 1)
@@ -318,9 +333,11 @@ Ext.Osiris.RegisterListener("StatusApplied", 4, "after", function(character, sta
         end
     -- Toggling Non Lethal to AI Companions
     elseif status == "NON_LETHAL" then
-        if Osi.IsControlled(character) == 1 then ToggleNonLethal(true) end
+        if NonLethalFollowControl and Osi.IsControlled(character) == 1 then ToggleNonLethal(true) end
     elseif status == "TAC_DYING" then
-        Osi.OpenMessageBoxYesNo(character, string.format("%s has died. Would you like to use a Scroll of Revivify?", charName))
+        if RevivifyPrompt then
+            Osi.OpenMessageBoxYesNo(character, string.format("%s has died. Would you like to use a Scroll of Revivify?", charName))
+        end
     -- Block statuses that interfere with AI control
     elseif ModVars().aiControlled and ModVars().aiControlled[character] and (status == "AI_HELPER_BREAKCONCENTRATION" or status == "TEMPORARILY_HOSTILE" or status == "GB_GUARDKILLER_WITNESS") then
         Logger.debug("Removing interfering status: " .. status)
@@ -348,7 +365,7 @@ Ext.Osiris.RegisterListener("StatusRemoved", 4, "before", function(character, st
         
         ModVars().aiControlled[character] = nil
     elseif status == "NON_LETHAL" then 
-        if Osi.IsControlled(character) == 1 then ToggleNonLethal(false) end
+        if NonLethalFollowControl and Osi.IsControlled(character) == 1 then ToggleNonLethal(false) end
     -- Player "Death" management
     elseif ModVars().characterState and ModVars().characterState[character] then
         if status == "TAC_DOWNED" then
@@ -361,7 +378,7 @@ Ext.Osiris.RegisterListener("StatusRemoved", 4, "before", function(character, st
 end)
 
 Ext.Osiris.RegisterListener("CastSpell", 5, "after", function(caster, spell, ...)
-    if not ModEnabled then return end
+    if not ModEnabled or not AISummonsEnabled then return end
     -- Toggling AI Summons passive on spell cast
     if spell == "Shout_AI_SUMMONS" then
         local passive = "AI_SUMMONS_Passive"
@@ -375,7 +392,7 @@ end)
 
 -- Enabling AI summons
 Ext.Osiris.RegisterListener("TagSet", 2, "after", function(target, tag)
-    if not ModEnabled then return end
+    if not ModEnabled or not AISummonsEnabled then return end
     if tag == "030a4a56-3248-4c91-962c-cf0a8c897c6a" then
         local character = Osi.GetUUID(target) or "Unknown"
         local name = GetCharacterName(character)
@@ -396,7 +413,7 @@ end)
 
 -- Disabling AI summons
 Ext.Osiris.RegisterListener("TagCleared", 2, "after", function(target, tag)
-    if not ModEnabled then return end
+    if not ModEnabled or not AISummonsEnabled then return end
     if tag == "030a4a56-3248-4c91-962c-cf0a8c897c6a" then
         local character = Osi.GetUUID(target) or "Unknown"
         local name = GetCharacterName(character)
@@ -413,7 +430,7 @@ end)
 
 -- New summons
 Ext.Osiris.RegisterListener("DB_PlayerSummons", 1, "after", function(summon)
-    if not ModEnabled then return end
+    if not ModEnabled or not AISummonsEnabled then return end
     local owner = Osi.CharacterGetOwner(summon) or "Unknown"
     Logger.info("Registering summon: " .. GetCharacterName(summon) .. " for " .. GetCharacterName(owner))
     RegisterSummon(owner, summon)
@@ -421,7 +438,7 @@ end)
 
 -- Deleted summons
 Ext.Osiris.RegisterListener("DB_PlayerSummons", 1, "afterDelete", function(summon)
-    if not ModEnabled then return end
+    if not ModEnabled or not AISummonsEnabled then return end
     local summoner = Osi.CharacterGetOwner(summon) or "Unknown"
     if ModVars().aiSummons[summoner] then
         Logger.info(string.format("Summon removed: %s from %s", GetCharacterName(summon), GetCharacterName(summoner)))
@@ -440,6 +457,6 @@ Ext.Osiris.RegisterListener("SavegameLoaded", 0, "after", function()
 end)
 
 Ext.Osiris.RegisterListener("CharacterJoinedParty", 1, "after", function(character)
-    if not ModEnabled then return end
+    if not ModEnabled or not AutoGrantContainer then return end
     EnsureContainerSpell(character)
 end)

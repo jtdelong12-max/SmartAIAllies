@@ -16,6 +16,27 @@
                             "Name": "Enabled",
                             "Description": "Toggle the mod on/off.",
                             "Default": true
+                        },
+                        {
+                            "Id": "auto_grant_container",
+                            "Type": "checkbox",
+                            "Name": "Auto-grant AI container spell",
+                            "Description": "Give the Target AI spell container to all party members on load or when they join.",
+                            "Default": true
+                        },
+                        {
+                            "Id": "revivify_prompt",
+                            "Type": "checkbox",
+                            "Name": "Revivify prompt",
+                            "Description": "Show the Scroll of Revivify prompt when protected deaths occur.",
+                            "Default": true
+                        },
+                        {
+                            "Id": "nonlethal_follow_controlled",
+                            "Type": "checkbox",
+                            "Name": "Follow non-lethal state",
+                            "Description": "When you toggle Non-Lethal on the controlled character, mirror it to AI companions.",
+                            "Default": true
                         }
                     ]
                 },
@@ -90,6 +111,13 @@
                                 "ReadOnly": false,
                                 "ShowSearchBar": true
                             }
+                        },
+                        {
+                            "Id": "ai_summons_enabled",
+                            "Type": "checkbox",
+                            "Name": "Enable AI summons",
+                            "Description": "Allow tagging and controlling summons via the AI Summons toggle and tag.",
+                            "Default": true
                         }
                     ]
                 }
